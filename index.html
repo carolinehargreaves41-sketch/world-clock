@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone-with-data-1970-2030.min.js"></script>
+
     <link rel="stylesheet" href="css/style.css" />
     <title>My World Clock</title>
   </head>
@@ -10,28 +13,30 @@
     <div class="container">
       <h1>World Clock</h1>
 
-      <select>
+      <select id="city">
         <option value="">Select a city..</option>
-        <option value="">London 🇬🇧</option>
-        <option value="">New York City 🇺🇸</option>
-        <option value="">Sydney 🇦🇺</option>
-        <option value="">Tokyo 🇯🇵</option>
+        <option value="Europe/London">London 🇬🇧</option>
+        <option value="America/New_York">New York 🇺🇸</option>
+        <option value="Australia/Sydney">Sydney 🇦🇺</option>
+        <option value="Asia/Tokyo">Tokyo 🇯🇵</option>
       </select>
 
-      <div class="city">
-        <div>
-          <h2>San Francisco 🇺🇸</h2>
-          <div class="date">October 31st 2025</div>
+      <div id="cities-container">
+        <div class="city" id="san-francisco">
+          <div>
+            <h2>San Francisco 🇺🇸</h2>
+            <div class="date"></div>
+          </div>
+          <div class="time"></div>
         </div>
-        <div class="time">1:48:15 <small> AM </small></div>
-      </div>
 
-      <div class="city">
-        <div>
-          <h2>Zurich 🇨🇭</h2>
-          <div class="date">October 31st 2025</div>
+        <div class="city" id="zurich">
+          <div>
+            <h2>Zurich 🇨🇭</h2>
+            <div class="date">October 31st 2025</div>
+          </div>
+          <div class="time">1:48:15 <small> AM </small></div>
         </div>
-        <div class="time">1:48:15 <small> AM </small></div>
       </div>
     </div>
 
