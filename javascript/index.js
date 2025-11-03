@@ -1,6 +1,6 @@
 let updateInterval;
 
-//Function for 3 defalt cities or 1 selected city
+//Function to update the time, date, and timezone offsets for all city elements
 function updateTime() {
   let cityElements = document.querySelectorAll(".city");
 
@@ -24,6 +24,7 @@ function updateTime() {
   });
 }
 
+//Function to handle user selecting a city from the dropdown menu
 function updateCity(event) {
   let cityTimeZone = event.target.value;
   if (!cityTimeZone) return;
