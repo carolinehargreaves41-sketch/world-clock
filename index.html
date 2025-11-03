@@ -5,47 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.6.0/moment-timezone-with-data-1970-2030.min.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>My World Clock</title>
   </head>
+
   <body>
     <div class="container">
-      <h1>World Clock</h1>
+      <img
+        src="https://s3.amazonaws.com/shecodesio-production/uploads/files/000/175/441/original/Timezone-one-clock-pink-purple-blue.png?1762112388"
+        alt="Timezone-one-clock-pink-purple-blue"
+      />
+
+      <h1>My World Clock</h1>
 
       <select id="city">
-        <option value="">Select a city..</option>
-        <option value="current">My current location..</option>
-        <option value="Europe/London">London 🇬🇧</option>
-        <option value="America/New_York">New York 🇺🇸</option>
-        <option value="Australia/Sydney">Sydney 🇦🇺</option>
-        <option value="Asia/Tokyo">Tokyo 🇯🇵</option>
+        <option value="">Select a city...</option>
+        <optgroup label="Local">
+          <option value="current">📍 My current location..</option>
+        </optgroup>
+
+        <optgroup label="Africa">
+          <option value="Africa/Cairo">Cairo 🇪🇬</option>
+          <option value="Africa/Johannesburg">Johannesburg 🇿🇦</option>
+          <option value="Africa/Kinshasa">Kinshasa 🇨🇩</option>
+          <option value="Africa/Lagos">Lagos 🇳🇬</option>
+          <option value="Africa/Nairobi">Nairobi 🇰🇪</option>
+        </optgroup>
+
+        <optgroup label="Antartica / Arctic">
+          <option value="Antarctica/South_Pole">South Pole 🇦🇶</option>
+          <option value="Arctic/Longyearbyen">Longyearbyen</option>
+        </optgroup>
+
+        <optgroup label="Asia">
+          <option value="Asia/Bangkok">Bangkok 🇹🇭</option>
+          <option value="Asia/Dubai">Dubai 🇦🇪</option>
+          <option value="Asia/Karachi">Karachi 🇵🇰</option>
+          <option value="Asia/Seoul">Seoul 🇰🇷</option>
+          <option value="Asia/Shanghai">Shanghai 🇨🇳</option>
+          <option value="Asia/Vladivostok">Vladivostok 🇷🇺</option>
+        </optgroup>
+
+        <optgroup label="Europe">
+          <option value="Europe/Berlin">Berlin 🇩🇪</option>
+          <option value="Europe/Moscow">Moscow 🇷🇺</option>
+          <option value="Europe/Paris">Paris 🇫🇷</option>
+          <option value="Atlantic/Reykjavik">Reykjavik 🇮🇸</option>
+          <option value="Europe/Zurich">Zurich 🇨🇭</option>
+        </optgroup>
+
+        <optgroup label="North America">
+          <option value="Atlantic/Bermuda">Bermuda 🇧🇲</option>
+          <option value="America/Los_Angeles">Los Angeles 🇺🇸</option>
+          <option value="America/Cancun">Cancun 🇲🇽</option>
+          <option value="America/Toronto">Toronto 🇨🇦</option>
+          <option value="America/Vancouver">Vancouver 🇨🇦</option>
+        </optgroup>
+
+        <optgroup label="South America">
+          <option value="America/Bogota">Bogota 🇨🇴</option>
+          <option value="America/Argentina/Buenos_Aires">
+            Buenos Aires 🇦🇷
+          </option>
+          <option value="America/Lima">Lima 🇵🇪</option>
+          <option value="America/Santiago">Santiago 🇨🇱</option>
+          <option value="America/Sao_Paulo">Sao Paulo 🇧🇷</option>
+        </optgroup>
+
+        <optgroup label="Oceania">
+          <option value="Pacific/Auckland">Auckland 🇳🇿</option>
+          <option value="Australia/Melbourne">Melbourne 🇦🇺</option>
+          <option value="Pacific/Fiji">Fiji 🇫🇯</option>
+          <option value="Pacific/Samoa">Samoa 🇼🇸</option>
+          <option value="Australia/Sydney">Sydney 🇦🇺</option>
+          <option value=""></option>
+        </optgroup>
       </select>
 
       <div id="cities-container">
-        <div class="city" id="san-francisco">
+        <div class="city" data-timezone="Europe/London">
           <div>
-            <h2>San Francisco 🇺🇸</h2>
+            <h2>London</h2>
             <div class="date"></div>
+            <div class="timezone-offset"></div>
           </div>
           <div class="time"></div>
         </div>
 
-        <div class="city" id="zurich">
+        <div class="city" data-timezone="America/New_York">
           <div>
-            <h2>Zurich 🇨🇭</h2>
-            <div class="date">October 31st 2025</div>
+            <h2>New York</h2>
+            <div class="date"></div>
+            <div class="timezone-offset"></div>
           </div>
-          <div class="time">1:48:15 <small> AM </small></div>
+          <div class="time"></div>
+        </div>
+
+        <div class="city" data-timezone="Asia/Tokyo">
+          <div>
+            <h2>Tokyo</h2>
+            <div class="date"></div>
+            <div class="timezone-offset"></div>
+          </div>
+          <div class="time"></div>
         </div>
       </div>
     </div>
 
     <footer>
-      This project was coded with 💜 by
-      <a href="#" target="_blank"> Caroline Hargreaves</a>, is
-      <a href="#" target="_blank"> open-sourced on GitHub</a>, and
-      <a href="#" target="_blank"> hosted on Netlify </a>
+      This project was coded by
+      <a href="https://github.com/carolinehargreaves41-sketch" target="_blank">Caroline Hargreaves</a>, is
+      <a href="https://github.com/carolinehargreaves41-sketch/world-clock" target="_blank">open-sourced on GitHub</a>, and
+      <a href="#" target="_blank">hosted on Netlify </a>
     </footer>
     <script src="javascript/index.js"></script>
   </body>

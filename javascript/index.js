@@ -1,55 +1,62 @@
-//Function for both San Fransisco and Zurich
+let updateInterval;
+
+//Function for 3 defalt cities or 1 selected city
 function updateTime() {
-  //San Francisco
-  let sanFranciscoElement = document.querySelector("#san-francisco");
-  if (sanFranciscoElement) {
-    let sanFranciscoDateElement = sanFranciscoElement.querySelector(".date");
-    let sanFranciscoTimeElement = sanFranciscoElement.querySelector(".time");
-    let sanFranciscoTime = moment.tz("America/Los_Angeles");
+  let cityElements = document.querySelectorAll(".city");
 
-    sanFranciscoDateElement.innerHTML = moment().format("MMMM Do YYYY");
-    sanFranciscoTimeElement.innerHTML = sanFranciscoTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    );
-  }
-  //Zurich
-  let zurichElement = document.querySelector("#zurich");
-  if (zurichElement) {
-    let zurichDateElement = zurichElement.querySelector(".date");
-    let zurichTimeElement = zurichElement.querySelector(".time");
-    let zurichTime = moment.tz("Europe/Zurich");
+  cityElements.forEach((cityElement) => {
+    let timezone = cityElement.dataset.timezone;
 
-    zurichDateElement.innerHTML = moment().format("MMMM Do YYYY");
-    zurichTimeElement.innerHTML = zurichTime.format(
-      "h:mm:ss [<small>]A[</small>]"
-    );
-  }
+    if (!timezone) return;
+
+    let dateElement = cityElement.querySelector(".date");
+    let timeElement = cityElement.querySelector(".time");
+    let offsetElement = cityElement.querySelector(".timezone-offset");
+
+    let cityTime = moment.tz(timezone);
+    dateElement.innerHTML = cityTime.format("MMMM Do YYYY");
+    timeElement.innerHTML = cityTime.format("h:mm:ss [<small>]A[</small>]");
+
+    if (offsetElement) {
+      let offset = cityTime.format("Z");
+      offsetElement.innerHTML = `UTC ${offset}`;
+    }
+  });
 }
 
 function updateCity(event) {
   let cityTimeZone = event.target.value;
+  if (!cityTimeZone) return;
+
   if (cityTimeZone === "current") {
     cityTimeZone = moment.tz.guess();
   }
-  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
-  let cityTime = moment().tz(cityTimeZone);
+
+  let cityName = cityTimeZone.replace(/_/g, " ").split("/")[1];
   let citiesElement = document.querySelector("#cities-container");
   citiesElement.innerHTML = `
-    <div class="city">
+    <div class="city" data-timezone="${cityTimeZone}">
     <div>
     <h2>${cityName}</h2>
-    <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+    <div class="date"></div>
+    <div class="timezone-offset"></div>
     </div>
-    <div class="time">${cityTime.format("h:mm:ss")}<small>${cityTime.format(
-    "A"
-  )}</small></div>
+    <div class="time"></div>
     </div>
-    <a href="index.html">All cities</a>
+    <a href="#" id="home-link">⬅ Back to All Cities</a>
     `;
+
+  document.getElementById("home-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    location.reload();
+  });
+
+  updateTime();
 }
 
 updateTime();
-setInterval(updateTime, 1000);
+
+updateInterval = setInterval(updateTime, 1000);
 
 let citiesSelectElement = document.querySelector("#city");
 citiesSelectElement.addEventListener("change", updateCity);
